@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://vnstk34xhxi5"]
+
+[ext_resource type="PackedScene" uid="uid://c4m0t7dum5ce0" path="res://Scene/button.tscn" id="1_e32lr"]
+[ext_resource type="Script" uid="uid://dt55vpei8o38m" path="res://Scripts/game_manager.gd" id="1_f38sd"]
+[ext_resource type="Script" uid="uid://b62imabpgv5ph" path="res://Scripts/label.gd" id="1_s60wc"]
+[ext_resource type="PackedScene" uid="uid://cdk0seic7esln" path="res://Scene/loss_timer.tscn" id="3_edujn"]
+[ext_resource type="Script" uid="uid://ck8x7rk5v5m86" path="res://Scripts/label_2.gd" id="3_i5nq2"]
+[ext_resource type="PackedScene" uid="uid://dodl5arv4qic5" path="res://Scene/loss_screen.tscn" id="6_ugwxx"]
+
+[node name="Game_Scene" type="Node2D"]
+z_index = -1
+
+[node name="Game_Manager" type="Node2D" parent="."]
+script = ExtResource("1_f38sd")
+
+[node name="Button" parent="." instance=ExtResource("1_e32lr")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "clicks:0"
+script = ExtResource("1_s60wc")
+
+[node name="Time" type="Label" parent="CanvasLayer/UI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_i5nq2")
+
+[node name="Loss_Timer" parent="." instance=ExtResource("3_edujn")]
+wait_time = 10.0
+one_shot = true
+
+[node name="Loss_Screen" parent="." instance=ExtResource("6_ugwxx")]
+process_mode = 3
+visible = false
+
+[connection signal="presscount" from="Button" to="CanvasLayer/UI/CenterContainer/VBoxContainer/Label" method="_on_button_presscount"]
+[connection signal="emittingtime" from="Loss_Timer" to="CanvasLayer/UI/CenterContainer/VBoxContainer/Time" method="_on_loss_timer_emittingtime"]
+[connection signal="timeout" from="Loss_Timer" to="Game_Manager" method="_on_loss_timer_timeout"]

@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://dodl5arv4qic5"]
+
+[ext_resource type="Script" uid="uid://b6uaejbsa7vpf" path="res://Scripts/loss_screen.gd" id="1_dyb61"]
+
+[node name="Loss_Screen" type="CanvasLayer"]
+script = ExtResource("1_dyb61")
+
+[node name="Loss_UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Loss_UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Restart" type="Button" parent="Loss_UI/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Restart"
+
+[node name="Options" type="Button" parent="Loss_UI/VBoxContainer"]
+layout_mode = 2
+text = "Options
+"
+
+[node name="Main_Menu" type="Button" parent="Loss_UI/VBoxContainer"]
+layout_mode = 2
+text = "Main_Menu"
+
+[connection signal="button_up" from="Loss_UI/VBoxContainer/Main_Menu" to="." method="_on_main_menu_button_up"]

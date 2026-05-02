@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdk0seic7esln"]
+
+[ext_resource type="Script" uid="uid://b4c1wgfuouwlc" path="res://Scripts/loss_timer.gd" id="1_bpox4"]
+
+[node name="Loss_Timer" type="Timer"]
+script = ExtResource("1_bpox4")
